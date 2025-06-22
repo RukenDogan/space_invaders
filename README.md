@@ -14,3 +14,11 @@
 
 # 👉 Installer Pygame :
 # pip install pygame
+
+## Installation
+
+# Pour installer les dépendances nécessaires, lancez :
+
+```
+pip install -r requirements.txt
+```
