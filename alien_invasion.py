@@ -8,7 +8,7 @@ from settings import Settings # Importe la classe Settings depuis le fichier set
 from ship import Ship # Importe la classe Ship depuis le fichier ship.py
 from alien import Alien # Importe la classe Alien depuis le fichier alien.py
 from home_screen import HomeScreen # Importe la classe HomeScreen depuis le fichier home_screen.py
-
+from bullet import Bullet # Importe la classe Bullet depuis le fichier bullet.py
 
 class AlienInvasion:
     """Classe principale pour gérer les ressources et le comportement du jeu"""
@@ -31,6 +31,7 @@ class AlienInvasion:
 
         self.ship = Ship(self) # Crée une instance de la classe Ship pour gérer le vaisseau spatial
         self.alien = Alien(self) # Crée une instance de la classe Alien pour gérer les aliens
+        self.bullets = pygame.sprite.Group() # Crée un groupe de sprites pour gérer les balles tirées par le vaisseau
         self.home_screen = HomeScreen(self) # Crée une instance de la classe HomeScreen pour gérer l'écran d'accueil
         
         self.show_home_screen = True # Indique si l'écran d'accueil doit être affiché
@@ -55,6 +56,7 @@ class AlienInvasion:
                 self.ship.update() # Met à jour la position du vaisseau
                 self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
+            self.bullets.update() # Met à jour la position des balles tirées par le vaisseau
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
     def check_events(self):      
@@ -77,8 +79,11 @@ class AlienInvasion:
                         self.ship.moving_right = True # Déplace le vaisseau vers la droite
                     elif event.key == pygame.K_LEFT: # Si la touche flèche gauche est enfoncée
                         self.ship.moving_left = True # Déplace le vaisseau vers la gauche
-                    elif event.key == pygame.K_q: # Si la touche Q est enfoncée
+                    elif event.key == pygame.K_ESCAPE: # Si la touche Q est enfoncée
+                        pygame.quit() # Quitte Pygame
                         sys.exit() # Quitte le jeu
+                    elif event.key == pygame.K_SPACE: # Si la touche espace est enfoncée
+                        self._fire_bullet() # Tire une balle depuis le vaisseau
 
     def _check_keyup_events(self, event):
                     """Réagit aux touches relâchées"""          
@@ -92,6 +97,8 @@ class AlienInvasion:
     def _update_screen(self):
             """Met à jour l'écran et affiche les éléments du jeu"""        
             self.screen.blit(self.bg_image, (0, 0))  # Affiche l'image de fond en (0,0)
+            for bullet in self.bullets.sprites():
+                bullet.draw_bullet()
             self.ship.blitme()                        # Dessine le vaisseau
             self.alien.blitme()                       # Dessine l'alien
             pygame.display.flip()                     # Met à jour l'écran
@@ -100,7 +107,12 @@ class AlienInvasion:
             """Met à jour l'écran d'accueil et affiche les éléments de l'écran d'accueil"""
             self.screen.blit(self.home_bg, (0, 0))  # Affiche l'image de fond en (0,0)
             self.home_screen.blitme()                        # Dessine l'image de l'écran d'accueil
-            pygame.display.flip()                     # Met à jour l'écran
+            pygame.display.flip()
+            
+    def _fire_bullet(self):
+        """Créer un nouveau tir et l'ajouter au groupe bullets"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)                 # Met à jour l'écran
 
 if __name__ == '__main__':
     # Crée une instance de jeu et exécute le jeu (la boucle principale)

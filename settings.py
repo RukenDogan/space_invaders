@@ -18,6 +18,6 @@ class Settings:
 
         # Paramètres du tir
         self.bullet_speed = 2.0 # Vitesse du tir
-        self.bullet_width = 3 # Largeur du tir
+        self.bullet_width = 5 # Largeur du tir
         self.bullet_height = 15 # Hauteur du tir
-        self.bullet_color = (60, 60, 60) # Couleur du tir
+        self.bullet_color = (255, 255, 255) # Couleur du tir
