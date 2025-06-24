@@ -21,9 +21,9 @@ class Ship:
 
     def update(self):
         """Mettre à jour le vaisseau"""
-        if self.moving_right: # Si le vaisseau est en mouvement vers la droite
+        if self.moving_right and self.rect.right < self.screen_rect.right: # Si le vaisseau est en mouvement vers la droite et qu'il est en dehors de l'écran
             self.x += self.settings.ship_speed # Déplacer le vaisseau vers la droite
-        if self.moving_left: # Si le vaisseau est en mouvement vers la gauche
+        if self.moving_left and self.rect.left > 0: # Si le vaisseau est en mouvement vers la gauche et qu'il est à l'intérieur de l'écran
             self.x -= self.settings.ship_speed # Déplacer le vaisseau vers la gauche
 
         self.rect.x = self.x # Mettre à jour la position du rectangle du vaisseau avec la nouvelle position horizontale

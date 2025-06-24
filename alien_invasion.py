@@ -67,7 +67,7 @@ class AlienInvasion:
                          self.ship.moving_right = False # Déplace le vaisseau vers la droite
                     elif event.key == pygame.K_LEFT: # Si la touche flèche gauche est relâchée
                         self.ship.moving_left = False # Déplace le vaisseau vers la gauche
-                    elif event.key == pygame.K_q: # Si la touche Q est relâchée
+                    elif event.key == pygame.K_ESCAPE: # Si la touche Q est relâchée
                         sys.exit() # Quitte le jeu
 
     def _update_screen(self):
