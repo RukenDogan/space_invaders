@@ -56,10 +56,15 @@ class AlienInvasion:
                 self.ship.update() # Met à jour la position du vaisseau
                 self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
+            for bullet in self.bullets.copy(): # Parcourt les balles tirées par le vaisseau
+                if bullet.rect.bottom <= 0: # Si la balle est en dehors de l'écran
+                    self.bullets.remove(bullet) # Supprime la balle
+                print(len(self.bullets)) # Affiche le nombre de balles restantes
+
             self.bullets.update() # Met à jour la position des balles tirées par le vaisseau
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
-    def check_events(self):      
+    def check_events(self):
             # Surveille les événements du clavier et de la souris
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -79,6 +84,10 @@ class AlienInvasion:
                         self.ship.moving_right = True # Déplace le vaisseau vers la droite
                     elif event.key == pygame.K_LEFT: # Si la touche flèche gauche est enfoncée
                         self.ship.moving_left = True # Déplace le vaisseau vers la gauche
+                    elif event.key == pygame.K_UP: # Si la touche flèche haut est enfoncée
+                         self.ship.moving_up = True # Déplace le vaisseau vers le haut
+                    elif event.key == pygame.K_DOWN: # Si la touche flèche bas est enfoncée
+                        self.ship.moving_down = True # Déplace le vaisseau vers le bas
                     elif event.key == pygame.K_ESCAPE: # Si la touche Q est enfoncée
                         pygame.quit() # Quitte Pygame
                         sys.exit() # Quitte le jeu
@@ -91,28 +100,32 @@ class AlienInvasion:
                          self.ship.moving_right = False # Déplace le vaisseau vers la droite
                     elif event.key == pygame.K_LEFT: # Si la touche flèche gauche est relâchée
                         self.ship.moving_left = False # Déplace le vaisseau vers la gauche
+                    elif event.key == pygame.K_UP: # Si la touche flèche haut est relâchée
+                        self.ship.moving_up = False # Déplace le vaisseau vers le haut
+                    elif event.key == pygame.K_DOWN: # Si la touche flèche bas est relâchée
+                        self.ship.moving_down = False # Déplace le vaisseau vers le bas
                     elif event.key == pygame.K_ESCAPE: # Si la touche Échap est enfoncée
                         sys.exit() # Quitte le jeu
 
     def _update_screen(self):
             """Met à jour l'écran et affiche les éléments du jeu"""        
             self.screen.blit(self.bg_image, (0, 0))  # Affiche l'image de fond en (0,0)
-            for bullet in self.bullets.sprites():
-                bullet.draw_bullet()
-            self.ship.blitme()                        # Dessine le vaisseau
-            self.alien.blitme()                       # Dessine l'alien
-            pygame.display.flip()                     # Met à jour l'écran
+            for bullet in self.bullets.sprites(): # Dessine les bullets
+                bullet.draw_bullet() # Dessine le bullet
+            self.ship.blitme() # Dessine le vaisseau
+            self.alien.blitme() # Dessine l'alien
+            pygame.display.flip() # Met à jour l'écran
 
     def _update_home_screen(self):
             """Met à jour l'écran d'accueil et affiche les éléments de l'écran d'accueil"""
             self.screen.blit(self.home_bg, (0, 0))  # Affiche l'image de fond en (0,0)
-            self.home_screen.blitme()                        # Dessine l'image de l'écran d'accueil
-            pygame.display.flip()
+            self.home_screen.blitme() # Dessine l'écran d'accueil
+            pygame.display.flip() # Met à jour l'écran pour afficher les éléments de l'écran d'accueil
             
     def _fire_bullet(self):
         """Créer un nouveau tir et l'ajouter au groupe bullets"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)                 # Met à jour l'écran
+        new_bullet = Bullet(self)  # Crée un nouveau tir
+        self.bullets.add(new_bullet)  # Ajoute le tir au groupe bullets
 
 if __name__ == '__main__':
     # Crée une instance de jeu et exécute le jeu (la boucle principale)

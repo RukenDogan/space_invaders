@@ -14,10 +14,10 @@ class Settings:
         self.alien_width = 60
         self.alien_height = 60
 
-        self.ship_speed = 1.5 # Vitesse du vaisseau
+        self.ship_speed = 2.5 # Vitesse du vaisseau
 
         # Paramètres du tir
         self.bullet_speed = 2.0 # Vitesse du tir
-        self.bullet_width = 5 # Largeur du tir
+        self.bullet_width = 5 # Largeur du tir (80 si image, pour height aussi)
         self.bullet_height = 15 # Hauteur du tir
         self.bullet_color = (255, 255, 255) # Couleur du tir
