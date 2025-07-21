@@ -88,9 +88,11 @@ class AlienInvasion:
                          self.ship.moving_up = True # Déplace le vaisseau vers le haut
                     elif event.key == pygame.K_DOWN: # Si la touche flèche bas est enfoncée
                         self.ship.moving_down = True # Déplace le vaisseau vers le bas
+
                     elif event.key == pygame.K_ESCAPE: # Si la touche Q est enfoncée
                         pygame.quit() # Quitte Pygame
                         sys.exit() # Quitte le jeu
+                        
                     elif event.key == pygame.K_SPACE: # Si la touche espace est enfoncée
                         self._fire_bullet() # Tire une balle depuis le vaisseau
 
