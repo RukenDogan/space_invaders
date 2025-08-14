@@ -13,6 +13,8 @@
 - Affichage d’un écran d’accueil pendant 3 secondes avant le démarrage
 - Redimensionnement automatique de l’image de fond
 - Système de tir (touche Espace) avec gestion de plusieurs balles via pygame.sprite.Group (plusieurs balles, suppression automatique)
+- Affichage d'un écran de contrôle après l'écran d'accueil
+- Son de fond (KAYTRANADA_SPACEINVADER.wav) (/!\ a changer pour des raisons de copyright)
 
 ## À faire :
 - Détection des collisions entre balles et aliens
