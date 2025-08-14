@@ -21,3 +21,8 @@ class Settings:
         self.bullet_width = 5 # Largeur du tir (80 si image, pour height aussi)
         self.bullet_height = 15 # Hauteur du tir
         self.bullet_color = (255, 255, 255) # Couleur du tir
+
+
+        # self.explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
+        # self.shoot_sound = pygame.mixer.Sound("sounds/shoot.wav")
+        # self.hit_sound = pygame.mixer.Sound("sounds/hit.wav")
