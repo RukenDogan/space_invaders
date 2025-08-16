@@ -14,7 +14,8 @@
 - Redimensionnement automatique de l’image de fond
 - Système de tir (touche Espace) avec gestion de plusieurs balles via pygame.sprite.Group (plusieurs balles, suppression automatique)
 - Affichage d'un écran de contrôle après l'écran d'accueil
-- Son de fond (KAYTRANADA_SPACEINVADER.wav) (/!\ a changer pour des raisons de copyright)
+- Ajout d'un son de fond pour l'écran de jeu (KAYTRANADA_SPACEINVADER.wav) (/!\ a changer pour des raisons de copyright)
+- Ajout d'un son pour l'écran de contrôle (life_on_line, produit par Gari Pi)
 
 ## À faire :
 - Détection des collisions entre balles et aliens
@@ -22,6 +23,16 @@
 - Ajout d’un système de vies
 - Apparition de plusieurs aliens
 - Sons (tir, explosion, musique)
+
+
+## Inspiration et ressources :
+- Python Crash Course - Eric Matthes
+- https://www.pygame.org/docs/
+- les images : https://opengameart.org/ et https://pixabay.com/
+- les sons : https://www.freesound.org/ et https://opengameart.org
+- le son de l'écran de contrôle : produit par Gari Pi
+- le son de fond : à venir
+
 
 
 # Avant de lancer le jeu, active l'environnement virtuel :

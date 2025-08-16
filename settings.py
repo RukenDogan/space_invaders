@@ -14,15 +14,12 @@ class Settings:
         self.alien_width = 60
         self.alien_height = 60
 
-        self.ship_speed = 2.5 # Vitesse du vaisseau
+        # Vitesse du vaisseau
+        self.ship_speed = 2.5
 
         # Paramètres du tir
         self.bullet_speed = 2.0 # Vitesse du tir
         self.bullet_width = 5 # Largeur du tir (80 si image, pour height aussi)
         self.bullet_height = 15 # Hauteur du tir
         self.bullet_color = (255, 255, 255) # Couleur du tir
-
-
-        # self.explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
-        # self.shoot_sound = pygame.mixer.Sound("sounds/shoot.wav")
-        # self.hit_sound = pygame.mixer.Sound("sounds/hit.wav")
+        self.bullets_allowed = 10 # Nombre maximum de tirs autorisés à l'écran
