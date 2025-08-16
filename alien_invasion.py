@@ -179,18 +179,33 @@ class AlienInvasion:
 
     def _create_fleet(self):
         """Créer une flotte d'aliens"""
-        alien_width = self.settings.alien_width # Récupère la largeur de l'alien
-        alien_height = self.settings.alien_height # Récupère la hauteur de l'alien
+        alien_width, alien_height = self.settings.alien_width, self.settings.alien_height # Récupère la largeur et la hauteur de l'alien à partir des paramètres du jeu (settings.py)
 
-        current_x = alien_width # Définir la position de départ de l'alien
-        current_y = alien_height # Définir la position de départ de l'alien
+        current_x, current_y = alien_width, alien_height # Définir la position de départ de l'alien
+        while current_y < (self.settings.screen_height - 3 * alien_height):
+        # Tant que la position verticale (current_y) des aliens est inférieure à la hauteur totale de l'écran
+        # moins trois fois la hauteur d'un alien, on peut encore placer une nouvelle rangée d'aliens.
+        # => Cela empêche les aliens d'être générés trop bas (près du vaisseau du joueur).
+            
+            while current_x < (self.settings.screen_width - 2 * alien_width):
+            # Tant que la position horizontale (current_x) est inférieure à la largeur de l'écran
+            # moins deux fois la largeur d'un alien, on peut encore ajouter un nouvel alien sur la ligne courante.
+            # => Cela évite que les aliens soient créés en dehors des bords droits de l'écran.    
+                self._create_alien(current_x, current_y) # Crée un nouvel alien à la position actuelle
+                current_x += 2 * alien_width # Déplace l'alien vers la droite
 
-        while current_x < (self.settings.screen_width - 2 * alien_width) and current_y < (self.settings.screen_height - 2 * alien_height): # Tant que la position de l'alien est dans les limites de l'écran
-            new_alien = Alien(self) # Crée une nouvelle instance de la classe Alien
-            new_alien.rect.x = current_x # Défini la position de l'alien
-            new_alien.rect.y = current_y # Défini la position de l'alien
-            self.aliens.add(new_alien) # Ajoute l'alien au groupe aliens
-            current_x += 2 * alien_width # Déplace l'alien vers la droite
+            current_x = alien_width # Réinitialise la position horizontale de l'alien
+            current_y += 2 * alien_height # Déplace l'alien vers le bas
+
+    def _create_alien(self, x_position, y_position):
+        """Créer un nouvel alien à la position x_position, y_position"""
+        new_alien = Alien(self) # Crée une nouvelle instance de la classe Alien
+            
+        new_alien.x = x_position # Défini la position de l'alien
+        new_alien.y = y_position # Défini la position de l'alien
+        new_alien.rect.x = x_position # Défini la position de l'alien
+        new_alien.rect.y = y_position # Défini la position de l'alien
+        self.aliens.add(new_alien) # Ajoute l'alien au groupe aliens
 
 
 

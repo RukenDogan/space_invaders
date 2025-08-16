@@ -30,7 +30,7 @@
 - https://www.pygame.org/docs/
 - les images : https://opengameart.org/ et https://pixabay.com/
 - les sons : https://www.freesound.org/ et https://opengameart.org
-- le son de l'écran de contrôle : produit par Gari Pi
+- le son de l'écran de contrôle : produit par Gari Pi https://spiceprogrammers.bandcamp.com/
 - le son de fond : à venir
 
 
