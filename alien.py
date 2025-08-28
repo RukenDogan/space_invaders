@@ -21,6 +21,15 @@ class Alien(Sprite):
         self.x = float(self.rect.x) # Stocker la position horizontale de l'alien en tant que valeur flottante
         self.y = float(self.rect.y) # Stocker la position verticale de l'alien en tant que valeur flottante
 
-    # def blitme(self):
-    #     """Dessiner l'alien à sa position actuelle"""
-    #     self.screen.blit(self.image, self.rect) # Utiliser blit pour dessiner l'image de l'alien à sa position actuelle
+
+    def check_edges(self):
+        """Retourne True si l'alien est en dehors des bords de l'écran"""
+        screen_rect = self.screen.get_rect() # Obtenir le rectangle de l'écran
+        return (self.rect.right >= screen_rect.right) or (self.rect.left <= 0) # Vérifier si l'alien est en dehors des bords de l'écran à droite ou à gauche
+
+
+    def update(self):
+        """Déplacer l'alien vers la droite"""
+        self.x += self.settings.alien_speed * self.settings.fleet_direction # Déplacer l'alien vers la droite ou la gauche en fonction de la direction de la flotte d'aliens
+        self.rect.x = self.x # Mettre à jour la position horizontale de l'alien
+

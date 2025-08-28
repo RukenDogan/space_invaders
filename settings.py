@@ -14,6 +14,15 @@ class Settings:
         self.alien_width = 60
         self.alien_height = 60
 
+        # Vitesse des aliens
+        self.alien_speed = 1.0
+
+        # Vitesse de la flotte d'aliens
+        self.fleet_drop_speed = 10
+
+        # Direction de la flotte d'aliens (1 = droite, -1 = gauche)
+        self.fleet_direction = 1
+
         # Vitesse du vaisseau
         self.ship_speed = 2.5
 

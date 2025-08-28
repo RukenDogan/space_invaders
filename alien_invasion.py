@@ -84,7 +84,7 @@ class AlienInvasion:
                 self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
             self._update_bullets() # Met à jour la position des tirs
-            self.aliens.update() # Met à jour la position des aliens
+            self._update_aliens() # Met à jour la position des aliens
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
     def check_events(self):
@@ -150,6 +150,11 @@ class AlienInvasion:
                 self.bullets.remove(bullet) # Supprime la balle
                 # print(len(self.bullets)) # Affiche le nombre de balles restantes
 
+    def _update_aliens(self):
+            """Met à jour la position des aliens"""
+            self._check_fleet_edges() # Vérifie si des aliens ont atteint un bord
+            self.aliens.update() # Met à jour la position des aliens
+
 
     def _update_screen(self):
             """Met à jour l'écran et affiche les éléments du jeu"""        
@@ -182,7 +187,7 @@ class AlienInvasion:
         alien_width, alien_height = self.settings.alien_width, self.settings.alien_height # Récupère la largeur et la hauteur de l'alien à partir des paramètres du jeu (settings.py)
 
         current_x, current_y = alien_width, alien_height # Définir la position de départ de l'alien
-        while current_y < (self.settings.screen_height - 3 * alien_height):
+        while current_y < (self.settings.screen_height - 5 * alien_height):
         # Tant que la position verticale (current_y) des aliens est inférieure à la hauteur totale de l'écran
         # moins trois fois la hauteur d'un alien, on peut encore placer une nouvelle rangée d'aliens.
         # => Cela empêche les aliens d'être générés trop bas (près du vaisseau du joueur).
@@ -192,10 +197,10 @@ class AlienInvasion:
             # moins deux fois la largeur d'un alien, on peut encore ajouter un nouvel alien sur la ligne courante.
             # => Cela évite que les aliens soient créés en dehors des bords droits de l'écran.    
                 self._create_alien(current_x, current_y) # Crée un nouvel alien à la position actuelle
-                current_x += 2 * alien_width # Déplace l'alien vers la droite
+                current_x += 1.5 * alien_width # Déplace l'alien vers la droite
 
             current_x = alien_width # Réinitialise la position horizontale de l'alien
-            current_y += 2 * alien_height # Déplace l'alien vers le bas
+            current_y += 1.5 * alien_height # Déplace l'alien vers le bas
 
     def _create_alien(self, x_position, y_position):
         """Créer un nouvel alien à la position x_position, y_position"""
@@ -207,6 +212,18 @@ class AlienInvasion:
         new_alien.rect.y = y_position # Défini la position de l'alien
         self.aliens.add(new_alien) # Ajoute l'alien au groupe aliens
 
+    def _check_fleet_edges(self):
+        """Réagit en fonction si des aliens ont atteint un bord"""
+        for alien in self.aliens.sprites(): # Parcourt les aliens
+            if alien.check_edges(): # Vérifie si l'alien est en dehors des bords de l'écran
+                self._change_fleet_direction() # Change la direction de la flotte d'aliens
+                break # Sort de la boucle pour ne pas continuer à parcourir les aliens
+
+    def _change_fleet_direction(self):
+        """Change la direction de la flotte d'aliens"""
+        for alien in self.aliens.sprites(): # Parcourt les aliens
+            alien.rect.y += self.settings.fleet_drop_speed # Déplace chaque alien vers le bas de la flotte
+        self.settings.fleet_direction *= -1 # Inverse la direction de la flotte d'aliens
 
 
 if __name__ == '__main__':
