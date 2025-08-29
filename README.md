@@ -16,9 +16,9 @@
 - Affichage d'un écran de contrôle après l'écran d'accueil
 - Ajout d'un son de fond pour l'écran de jeu (KAYTRANADA_SPACEINVADER.wav) (/!\ a changer pour des raisons de copyright)
 - Ajout d'un son pour l'écran de contrôle (life_on_line, produit par Gari Pi)
+- Détection des collisions entre balles et aliens
 
 ## À faire :
-- Détection des collisions entre balles et aliens
 - Affichage du score
 - Ajout d’un système de vies
 - Apparition de plusieurs aliens
