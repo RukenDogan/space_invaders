@@ -6,8 +6,8 @@ class Settings:
     def __init__(self):
         """Initialiser les paramètres du jeu"""
         # Paramètres de l'écran
-        self.screen_width = 900 # Largeur de l'écran
-        self.screen_height = 600 # Hauteur de l'écran
+        self.screen_width = 900 # Largeur de l'écran 900 pour 16:9
+        self.screen_height = 600 # Hauteur de l'écran 600 pour 16:9
         # self.bg_color = (230, 230, 230)
 
         # taille de l'alien

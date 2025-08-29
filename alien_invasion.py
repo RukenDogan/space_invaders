@@ -149,6 +149,8 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0: # Si la balle est en dehors de l'écran
                 self.bullets.remove(bullet) # Supprime la balle
                 # print(len(self.bullets)) # Affiche le nombre de balles restantes
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True) # Vérifie les collisions entre les balles et les aliens
+        
 
     def _update_aliens(self):
             """Met à jour la position des aliens"""
