@@ -18,11 +18,12 @@
 - Ajout d'un son pour l'écran de contrôle (life_on_line, produit par Gari Pi)
 - Apparition d'une flotte d'aliens
 - Détection des collisions entre balles et aliens
+- Son de tir
 
 ## À faire :
 - Affichage du score
 - Ajout d’un système de vies
-- Sons (tir, explosion, musique)
+- Son (explosion)
 
 
 ## Inspiration et ressources :
