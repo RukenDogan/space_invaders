@@ -53,6 +53,10 @@ class AlienInvasion:
         self.background_sound.set_volume(0.5) # Définit le volume du son de fond
         self.background_music_playing = False # Indique si la musique de fond est en cours de lecture
 
+        self.bulletshoot_sound = pygame.mixer.Sound("sounds/shoot.wav") # Son de tir du jeu
+        self.bulletshoot_sound.set_volume(0.5) # Définit le volume du son de tir
+        self.bulletshoot_music_playing = False # Indique si la musique de tir est en cours de lecture
+
 
 
     def run_game(self):
@@ -83,8 +87,10 @@ class AlienInvasion:
                 self.ship.update() # Met à jour la position du vaisseau
                 self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
+
             self._update_bullets() # Met à jour la position des tirs
             self._update_aliens() # Met à jour la position des aliens
+            # self._update_ship() # Met à jour le vaisseau
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
     def check_events(self):
@@ -119,13 +125,15 @@ class AlienInvasion:
                     elif event.key == pygame.K_DOWN: # Si la touche flèche bas est enfoncée
                         self.ship.moving_down = True # Déplace le vaisseau vers le bas
 
-                    elif event.key == pygame.K_ESCAPE: # Si la touche Q est enfoncée
+                    elif event.key == pygame.K_ESCAPE: # Si la touche Échap est enfoncée
                         self.background_sound.stop() # Arrête le son de fond
                         pygame.quit() # Quitte Pygame
                         sys.exit() # Quitte le jeu
                         
                     elif event.key == pygame.K_SPACE: # Si la touche espace est enfoncée
                         self._fire_bullet() # Tire une balle depuis le vaisseau
+                        self.bulletshoot_sound.play() # Joue le son de tir
+                    
 
     def _check_keyup_events(self, event):
                     """Réagit aux touches relâchées"""          
@@ -166,6 +174,7 @@ class AlienInvasion:
             self.ship.blitme() # Dessine le vaisseau
             self.aliens.draw(self.screen) # Dessine les aliens à leur position actuelle
             pygame.display.flip() # Met à jour l'écran
+
 
     def _update_home_screen(self):
             """Met à jour l'écran d'accueil et affiche les éléments de l'écran d'accueil"""
@@ -226,6 +235,14 @@ class AlienInvasion:
         for alien in self.aliens.sprites(): # Parcourt les aliens
             alien.rect.y += self.settings.fleet_drop_speed # Déplace chaque alien vers le bas de la flotte
         self.settings.fleet_direction *= -1 # Inverse la direction de la flotte d'aliens
+
+    # def _update_ship(self):
+    #     """Met à jour le vaisseau"""
+    #     self.ship.update() # Met à jour le vaisseau
+    #     collisions = pygame.sprite.spritecollide(self.ship, self.aliens, True) # Vérifie les collisions entre le vaisseau et les aliens
+    #     if collisions: # Si le vaisseau a touché un alien
+    #         self.ship.alive = False # Le vaisseau n'est plus vivant
+    #         # self.score += 1 # Incrémente le score
 
 
 if __name__ == '__main__':

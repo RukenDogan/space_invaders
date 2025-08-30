@@ -22,6 +22,10 @@ class Ship:
         self.moving_up = False # Définir le vaisseau comme étant en mouvement vers le haut
         self.moving_down = False # Définir le vaisseau comme étant en mouvement vers le bas
 
+        self.alive = True # Le vaisseau est vivant (pour pouvoir le faire disparaitre)
+    
+
+
     def update(self):
         """Mettre à jour le vaisseau"""
         if self.moving_right and self.rect.right < self.screen_rect.right: # Si le vaisseau est en mouvement vers la droite et qu'il est en dehors de l'écran
@@ -36,6 +40,7 @@ class Ship:
         self.rect.x = self.x # Mettre à jour la position du rectangle du vaisseau avec la nouvelle position horizontale
         self.rect.y = self.y # Mettre à jour la position du rectangle du vaisseau avec la nouvelle position verticale
         
+
     def blitme(self):
         """Dessiner le vaisseau à sa position actuelle"""
         self.screen.blit(self.image, self.rect) # Utiliser blit pour dessiner l'image du vaisseau à sa position actuelle
