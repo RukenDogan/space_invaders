@@ -25,7 +25,7 @@
 - Son (explosion)
 
 ## Visuel
-[Gif de l'écran du jeu](images/screen.gif)
+![Gif de l'écran du jeu](images/screen.gif)
 
 
 ## Inspiration et ressources :
