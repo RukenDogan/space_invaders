@@ -11,7 +11,6 @@
 - Limitation du vaisseau aux bords de l’écran
 - Architecture modulaire (classes séparées dans plusieurs fichiers : `settings.py`, `ship.py`, `alien.py`, `home_screen.py`, `bullet.py`)
 - Affichage d’un écran d’accueil pendant 3 secondes avant le démarrage
-- Redimensionnement automatique de l’image de fond
 - Système de tir (touche Espace) avec gestion de plusieurs balles via pygame.sprite.Group (plusieurs balles, suppression automatique)
 - Affichage d'un écran de contrôle après l'écran d'accueil
 - Ajout d'un son de fond pour l'écran de jeu (KAYTRANADA_SPACEINVADER.wav) (/!\ a changer pour des raisons de copyright)
@@ -24,6 +23,9 @@
 - Affichage du score
 - Ajout d’un système de vies
 - Son (explosion)
+
+## Visuel
+[Gif de l'écran du jeu](images/screen.gif)
 
 
 ## Inspiration et ressources :
@@ -67,4 +69,9 @@ pip install pygame
 
 ```
 pip install -r requirements.txt
+```
+
+# Mise à jour du fichier requirements.txt :
+```
+pip freeze > requirements.txt
 ```

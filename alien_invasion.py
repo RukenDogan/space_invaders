@@ -115,7 +115,7 @@ class AlienInvasion:
                     self._check_keyup_events(event) # Vérifie les événements clavier
 
     def _check_keydown_events(self, event):
-                    """Réagit aux touches enfoncées""" 
+                    """Réagit aux touches enfoncées"""
                     if event.key == pygame.K_RIGHT: # Si la touche flèche droite est enfoncée
                         self.ship.moving_right = True # Déplace le vaisseau vers la droite
                     elif event.key == pygame.K_LEFT: # Si la touche flèche gauche est enfoncée
