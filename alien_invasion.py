@@ -9,6 +9,8 @@ from ship import Ship # Importe la classe Ship depuis le fichier ship.py
 from alien import Alien # Importe la classe Alien depuis le fichier alien.py
 from home_screen import HomeScreen # Importe la classe HomeScreen depuis le fichier home_screen.py
 from bullet import Bullet # Importe la classe Bullet depuis le fichier bullet.py
+from time import sleep # Importe la fonction sleep depuis le module time pour faire des pauses dans le jeu
+from game_stats import GameStats # Importe la classe GameStats depuis le fichier game_stats.py
 
 class AlienInvasion:
     """Classe principale pour gérer les ressources et le comportement du jeu"""
@@ -29,6 +31,7 @@ class AlienInvasion:
         self.bg_image = pygame.image.load('images/bg.png')  # Charge l'image du background
         self.bg_image = pygame.transform.scale(self.bg_image, (self.settings.screen_width, self.settings.screen_height))  # Ajuste la taille pour remplir l'écran
 
+        self.stats = GameStats(self) # Crée une instance de la classe GameStats pour gérer les statistiques du jeu
         self.ship = Ship(self) # Crée une instance de la classe Ship pour gérer le vaisseau spatial
         self.bullets = pygame.sprite.Group() # Crée un groupe de sprites pour gérer les balles tirées par le vaisseau
         self.aliens = pygame.sprite.Group() # Crée un groupe de sprites pour gérer les aliens
@@ -57,7 +60,7 @@ class AlienInvasion:
         self.bulletshoot_sound.set_volume(0.5) # Définit le volume du son de tir
         self.bulletshoot_music_playing = False # Indique si la musique de tir est en cours de lecture
 
-
+        self.game_active = True # Indique si le jeu est en cours d'exécution
 
     def run_game(self):
         """Démarrer la boucle principale du jeu"""
@@ -84,12 +87,16 @@ class AlienInvasion:
                     self.background_sound.fadeout(2000) # Arrête le son de fond avec un délai de 1 seconde
                     self.background_sound.play(-1, fade_ms=2000) # Joue le son de fond en boucle infinie avec un délai de 1 seconde
                     self.background_music_playing = True # Démarre la musique de fond
-                self.ship.update() # Met à jour la position du vaisseau
+                # self.ship.update() # Met à jour la position du vaisseau
                 self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
-
-            self._update_bullets() # Met à jour la position des tirs
-            self._update_aliens() # Met à jour la position des aliens
+                if self.game_active:
+                     self.ship.update() # Met à jour la position du vaisseau
+                     self._update_bullets() # Met à jour la position des tirs
+                     self._update_aliens() # Met à jour la position des aliens
+                     
+            # self._update_bullets() # Met à jour la position des tirs
+            # self._update_aliens() # Met à jour la position des aliens
             # self._update_ship() # Met à jour le vaisseau
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
@@ -165,6 +172,25 @@ class AlienInvasion:
             self._check_fleet_edges() # Vérifie si des aliens ont atteint un bord
             self.aliens.update() # Met à jour la position des aliens
 
+            # Vérifie les collisions entre le vaisseau et les aliens
+            if pygame.sprite.spritecollideany(self.ship, self.aliens):
+                print("Le vaisseau a été touché !") # Affiche un message si le vaisseau a été touché
+                self._ship_hit() # Gère le vaisseau touché
+                 
+    def _ship_hit(self):
+         """Vérifie si le vaisseau a été touché"""
+         if self.stats.ships_left > 0: # Si le nombre de vaisseaux restants est supérieur à 0
+            self.stats.ships_left -= 1 # Décrémente le nombre de vaisseaux restants
+
+            self.bullets.empty() # Vide la liste des bullets
+            self.aliens.empty() # Vide la liste des aliens
+
+            self._create_fleet() # Crée une nouvelle flotte d'aliens
+            self.ship.center_ship() # Centre le vaisseau
+            sleep(0.5) # Pause de 0.5 seconde
+         else:
+            self.game_active = False # Le jeu est terminé
+    
 
     def _update_screen(self):
             """Met à jour l'écran et affiche les éléments du jeu"""        

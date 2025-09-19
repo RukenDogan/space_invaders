@@ -44,3 +44,9 @@ class Ship:
     def blitme(self):
         """Dessiner le vaisseau à sa position actuelle"""
         self.screen.blit(self.image, self.rect) # Utiliser blit pour dessiner l'image du vaisseau à sa position actuelle
+
+    def center_ship(self):
+        """Centrer le vaisseau sur l'écran"""
+        self.rect.midbottom = self.screen_rect.midbottom # Centrer le vaisseau au bas de l'écran
+        self.x = float(self.rect.x) # Mettre à jour la position horizontale du vaisseau
+        self.y = float(self.rect.y) # Mettre à jour la position verticale du vaisseau

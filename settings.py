@@ -25,6 +25,7 @@ class Settings:
 
         # Vitesse du vaisseau
         self.ship_speed = 2.5
+        self.ship_limit = 3 # Nombre de vaisseaux (vies) que l'on peut avoir en jeu
 
         # Paramètres du tir
         self.bullet_speed = 2.0 # Vitesse du tir
