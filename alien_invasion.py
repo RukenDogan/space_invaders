@@ -87,7 +87,6 @@ class AlienInvasion:
                     self.background_sound.fadeout(2000) # Arrête le son de fond avec un délai de 1 seconde
                     self.background_sound.play(-1, fade_ms=2000) # Joue le son de fond en boucle infinie avec un délai de 1 seconde
                     self.background_music_playing = True # Démarre la musique de fond
-                # self.ship.update() # Met à jour la position du vaisseau
                 self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
                 if self.game_active:
@@ -95,9 +94,7 @@ class AlienInvasion:
                      self._update_bullets() # Met à jour la position des tirs
                      self._update_aliens() # Met à jour la position des aliens
                      
-            # self._update_bullets() # Met à jour la position des tirs
-            # self._update_aliens() # Met à jour la position des aliens
-            # self._update_ship() # Met à jour le vaisseau
+           
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
     def check_events(self):
@@ -176,7 +173,9 @@ class AlienInvasion:
             if pygame.sprite.spritecollideany(self.ship, self.aliens):
                 print("Le vaisseau a été touché !") # Affiche un message si le vaisseau a été touché
                 self._ship_hit() # Gère le vaisseau touché
-                 
+            
+            self._check_aliens_bottom() # Vérifie si des aliens ont atteint le bas de l'écran
+
     def _ship_hit(self):
          """Vérifie si le vaisseau a été touché"""
          if self.stats.ships_left > 0: # Si le nombre de vaisseaux restants est supérieur à 0
@@ -262,14 +261,12 @@ class AlienInvasion:
             alien.rect.y += self.settings.fleet_drop_speed # Déplace chaque alien vers le bas de la flotte
         self.settings.fleet_direction *= -1 # Inverse la direction de la flotte d'aliens
 
-    # def _update_ship(self):
-    #     """Met à jour le vaisseau"""
-    #     self.ship.update() # Met à jour le vaisseau
-    #     collisions = pygame.sprite.spritecollide(self.ship, self.aliens, True) # Vérifie les collisions entre le vaisseau et les aliens
-    #     if collisions: # Si le vaisseau a touché un alien
-    #         self.ship.alive = False # Le vaisseau n'est plus vivant
-    #         # self.score += 1 # Incrémente le score
-
+    def _check_aliens_bottom(self):
+        """Vérifie si des aliens ont atteint le bas de l'écran"""
+        for alien in self.aliens.sprites(): # Parcourt les aliens
+            if alien.rect.bottom >= self.settings.screen_height: # Si l'alien est en dehors du bas de l'écran
+                self._ship_hit() # Gère le vaisseau touché
+                break # Sort de la boucle pour ne pas continuer à parcourir les aliens
 
 if __name__ == '__main__':
     # Crée une instance de jeu et exécute le jeu (la boucle principale)
