@@ -87,14 +87,14 @@ class AlienInvasion:
                     self.background_sound.fadeout(2000) # Arrête le son de fond avec un délai de 1 seconde
                     self.background_sound.play(-1, fade_ms=2000) # Joue le son de fond en boucle infinie avec un délai de 1 seconde
                     self.background_music_playing = True # Démarre la musique de fond
-                self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
 
                 if self.game_active:
                      self.ship.update() # Met à jour la position du vaisseau
                      self._update_bullets() # Met à jour la position des tirs
                      self._update_aliens() # Met à jour la position des aliens
                      
-           
+                self._update_screen() # Met à jour l'écran pour afficher les éléments du jeu
+
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
     def check_events(self):
