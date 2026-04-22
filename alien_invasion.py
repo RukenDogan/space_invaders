@@ -60,7 +60,8 @@ class AlienInvasion:
         self.bulletshoot_sound.set_volume(0.5) # Définit le volume du son de tir
         self.bulletshoot_music_playing = False # Indique si la musique de tir est en cours de lecture
 
-        self.game_active = True # Indique si le jeu est en cours d'exécution
+        self.game_active = False # Indique si le jeu est actif (en cours de jeu) ou non (écran d'accueil ou écran de contrôle)
+
 
     def run_game(self):
         """Démarrer la boucle principale du jeu"""
@@ -97,6 +98,7 @@ class AlienInvasion:
 
             self.clock.tick(60) # Limite la boucle à 60 images par seconde
 
+
     def check_events(self):
             # Surveille les événements du clavier et de la souris
             for event in pygame.event.get():
@@ -117,6 +119,7 @@ class AlienInvasion:
 
                 elif event.type == pygame.KEYUP: # vérifie si une touche est relâchée
                     self._check_keyup_events(event) # Vérifie les événements clavier
+
 
     def _check_keydown_events(self, event):
                     """Réagit aux touches enfoncées"""
@@ -176,6 +179,7 @@ class AlienInvasion:
             
             self._check_aliens_bottom() # Vérifie si des aliens ont atteint le bas de l'écran
 
+
     def _ship_hit(self):
          """Vérifie si le vaisseau a été touché"""
          if self.stats.ships_left > 0: # Si le nombre de vaisseaux restants est supérieur à 0
@@ -207,16 +211,19 @@ class AlienInvasion:
             self.home_screen.blitme() # Dessine l'écran d'accueil
             pygame.display.flip() # Met à jour l'écran pour afficher les éléments de l'écran d'accueil
 
+
     def _update_controls_screen(self):
             """Met à jour l'écran de contrôle et affiche les éléments de l'écran de contrôle"""
             self.screen.blit(self.controls_bg, (0, 0))  # Affiche l'image de fond en (0,0)
             pygame.display.flip() # Met à jour l'écran pour afficher les éléments de l'écran de contrôle
             
+
     def _fire_bullet(self):
         """Créer un nouveau tir et l'ajouter au groupe bullets"""
         if len(self.bullets) < self.settings.bullets_allowed: # Si le nombre de tirs est inférieur au nombre maximum autorisé
             new_bullet = Bullet(self)  # Crée un nouveau tir
             self.bullets.add(new_bullet)  # Ajoute le tir au groupe bullets
+
 
     def _create_fleet(self):
         """Créer une flotte d'aliens"""
@@ -238,6 +245,7 @@ class AlienInvasion:
             current_x = alien_width # Réinitialise la position horizontale de l'alien
             current_y += 1.5 * alien_height # Déplace l'alien vers le bas
 
+
     def _create_alien(self, x_position, y_position):
         """Créer un nouvel alien à la position x_position, y_position"""
         new_alien = Alien(self) # Crée une nouvelle instance de la classe Alien
@@ -248,6 +256,7 @@ class AlienInvasion:
         new_alien.rect.y = y_position # Défini la position de l'alien
         self.aliens.add(new_alien) # Ajoute l'alien au groupe aliens
 
+
     def _check_fleet_edges(self):
         """Réagit en fonction si des aliens ont atteint un bord"""
         for alien in self.aliens.sprites(): # Parcourt les aliens
@@ -255,11 +264,13 @@ class AlienInvasion:
                 self._change_fleet_direction() # Change la direction de la flotte d'aliens
                 break # Sort de la boucle pour ne pas continuer à parcourir les aliens
 
+
     def _change_fleet_direction(self):
         """Change la direction de la flotte d'aliens"""
         for alien in self.aliens.sprites(): # Parcourt les aliens
             alien.rect.y += self.settings.fleet_drop_speed # Déplace chaque alien vers le bas de la flotte
         self.settings.fleet_direction *= -1 # Inverse la direction de la flotte d'aliens
+
 
     def _check_aliens_bottom(self):
         """Vérifie si des aliens ont atteint le bas de l'écran"""
@@ -267,6 +278,7 @@ class AlienInvasion:
             if alien.rect.bottom >= self.settings.screen_height: # Si l'alien est en dehors du bas de l'écran
                 self._ship_hit() # Gère le vaisseau touché
                 break # Sort de la boucle pour ne pas continuer à parcourir les aliens
+
 
 if __name__ == '__main__':
     # Crée une instance de jeu et exécute le jeu (la boucle principale)
