@@ -26,3 +26,8 @@ class Button:
         self.msg_image = self.font.render(msg, True, self.text_color, self.button_color) # Convertir le message en une image
         self.msg_image_rect = self.msg_image.get_rect() # Obtenir le rectangle de l'image du message
         self.msg_image_rect.center = self.rect.center # Centrer l'image du message sur le rectangle du bouton
+
+    def draw_button(self):
+        """Dessiner le bouton et le message dessus"""
+        self.screen.fill(self.button_color, self.rect) # Remplir le rectangle du bouton avec la couleur du bouton
+        self.screen.blit(self.msg_image, self.msg_image_rect) # Dessiner l'image du message sur le bouton

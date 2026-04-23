@@ -11,7 +11,7 @@ from home_screen import HomeScreen # Importe la classe HomeScreen depuis le fich
 from bullet import Bullet # Importe la classe Bullet depuis le fichier bullet.py
 from time import sleep # Importe la fonction sleep depuis le module time pour faire des pauses dans le jeu
 from game_stats import GameStats # Importe la classe GameStats depuis le fichier game_stats.py
-
+from button import Button # Importe la classe Button depuis le fichier button.py
 class AlienInvasion:
     """Classe principale pour gérer les ressources et le comportement du jeu"""
 
@@ -37,7 +37,7 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group() # Crée un groupe de sprites pour gérer les aliens
         self._create_fleet() # Crée une flotte d'aliens
         self.home_screen = HomeScreen(self) # Crée une instance de la classe HomeScreen pour gérer l'écran d'accueil
-        
+        self.play_button = Button(self, "Play") # Crée un bouton de démarrage pour le jeu
         self.show_home_screen = True # Indique si l'écran d'accueil doit être affiché
         self.start_time = time.time() # Enregistre le temps de début pour gérer l'affichage de l'écran d'accueil
 
