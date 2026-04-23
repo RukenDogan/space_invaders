@@ -37,7 +37,6 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group() # Crée un groupe de sprites pour gérer les aliens
         self._create_fleet() # Crée une flotte d'aliens
         self.home_screen = HomeScreen(self) # Crée une instance de la classe HomeScreen pour gérer l'écran d'accueil
-        self.play_button = Button(self, "Play") # Crée un bouton de démarrage pour le jeu
         self.show_home_screen = True # Indique si l'écran d'accueil doit être affiché
         self.start_time = time.time() # Enregistre le temps de début pour gérer l'affichage de l'écran d'accueil
 
@@ -61,7 +60,8 @@ class AlienInvasion:
         self.bulletshoot_music_playing = False # Indique si la musique de tir est en cours de lecture
 
         self.game_active = False # Indique si le jeu est actif (en cours de jeu) ou non (écran d'accueil ou écran de contrôle)
-
+        
+        self.play_button = Button(self, "Play") # Crée un bouton de démarrage pour le jeu
 
     def run_game(self):
         """Démarrer la boucle principale du jeu"""
@@ -202,6 +202,10 @@ class AlienInvasion:
                 bullet.draw_bullet() # Dessine le bullet
             self.ship.blitme() # Dessine le vaisseau
             self.aliens.draw(self.screen) # Dessine les aliens à leur position actuelle
+
+            if not self.game_active: # Si le jeu n'est pas actif (écran d'accueil ou écran de contrôle)
+                self.play_button.draw_button() # Dessine le bouton de démarrage sur l'écran
+
             pygame.display.flip() # Met à jour l'écran
 
 
