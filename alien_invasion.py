@@ -171,7 +171,8 @@ class AlienInvasion:
 
     def _check_play_button(self, mouse_pos):
         """Commence un nouveau jeu lorsque le joueur clique sur Play"""
-        if self.play_button.rect.collidepoint(mouse_pos) and not self.game_active:  # Si le bouton de démarrage est cliqué et que le jeu n'est pas actif
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)  # Vérifie si le bouton de démarrage a été cliqué
+        if button_clicked and not self.game_active:  # Si le bouton de démarrage a été cliqué et que le jeu n'est pas actif
             self.stats.reset_stats() # Réinitialise les statistiques du jeu
             self.bullets.empty()  # Supprime toutes les balles
             self._create_fleet() # crée une nouvelle flotte d'aliens
