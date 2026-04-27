@@ -251,6 +251,7 @@ class AlienInvasion:
             sleep(0.5)  # Pause de 0.5 seconde
         else:
             self.game_active = False  # Le jeu est terminé
+            pygame.mouse.set_visible(True)  # Affiche le curseur de la souris pendant l'écran de fin de jeu
 
     def _update_screen(self):
         """Met à jour l'écran et affiche les éléments du jeu"""
