@@ -100,6 +100,10 @@ class AlienInvasion:
         # Crée un bouton de démarrage pour le jeu
         self.play_button = Button(self, "Play")
 
+        self.speedup_scale = 1.1 # Facteur d'accélération pour augmenter la vitesse du jeu
+
+        self.initialize_dynamic_settings() # Initialise les paramètres dynamiques du jeu
+
     def run_game(self):
         """Démarrer la boucle principale du jeu"""
         while True:
