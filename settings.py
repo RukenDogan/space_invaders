@@ -33,3 +33,12 @@ class Settings:
         self.bullet_height = 15 # Hauteur du tir
         self.bullet_color = (255, 255, 255) # Couleur du tir
         self.bullets_allowed = 10 # Nombre maximum de tirs autorisés à l'écran
+
+    def initialize_dynamic_settings(self):
+        """Initialiser les paramètres qui changent au cours du jeu"""
+        self.ship_speed = 1.5
+        self.bullet_speed = 2.5
+        self.alien_speed = 1.0
+
+        # fleet_direction de 1 représente la droite ; -1 représente la gauche.
+        self.fleet_direction = 1
