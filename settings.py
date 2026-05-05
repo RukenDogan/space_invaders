@@ -34,6 +34,8 @@ class Settings:
         self.bullet_color = (255, 255, 255) # Couleur du tir
         self.bullets_allowed = 10 # Nombre maximum de tirs autorisés à l'écran
 
+        self.speedup_scale = 1.1 # Facteur d'accélération pour augmenter la vitesse du jeu
+
     def initialize_dynamic_settings(self):
         """Initialiser les paramètres qui changent au cours du jeu"""
         self.ship_speed = 1.5
@@ -42,3 +44,9 @@ class Settings:
 
         # fleet_direction de 1 représente la droite ; -1 représente la gauche.
         self.fleet_direction = 1
+
+    def increase_speed(self):
+        """Augmenter les paramètres de vitesse et de points"""
+        self.ship_speed *= self.speedup_scale
+        self.bullet_speed *= self.speedup_scale
+        self.alien_speed *= self.speedup_scale

@@ -100,9 +100,9 @@ class AlienInvasion:
         # Crée un bouton de démarrage pour le jeu
         self.play_button = Button(self, "Play")
 
-        self.speedup_scale = 1.1 # Facteur d'accélération pour augmenter la vitesse du jeu
+        self.settings.initialize_dynamic_settings() # Initialise les paramètres dynamiques du jeu
 
-        self.initialize_dynamic_settings() # Initialise les paramètres dynamiques du jeu
+        self.settings.increase_speed() # Augmente la vitesse du jeu pour rendre le jeu plus difficile au fur et à mesure que le joueur progresse
 
     def run_game(self):
         """Démarrer la boucle principale du jeu"""
@@ -225,9 +225,18 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:  # Si la balle est en dehors de l'écran
                 self.bullets.remove(bullet)  # Supprime la balle
                 # print(len(self.bullets)) # Affiche le nombre de balles restantes
-        # Vérifie les collisions entre les balles et les aliens
-        collisions = pygame.sprite.groupcollide(
-            self.bullets, self.aliens, True, True)
+                
+        self._check_bullet_alien_collisions()  # Vérifie les collisions entre les balles et les aliens
+  
+  
+    def _check_bullet_alien_collisions(self):
+        """Vérifie les collisions entre les balles et les aliens"""
+        collisions = pygame.sprite.groupcollide( # Vérifie les collisions entre les balles et les aliens
+            self.bullets, self.aliens, True, True) # Supprime la balle et l'alien lorsqu'une collision est détectée
+        if not self.aliens:  # Si tous les aliens ont été détruits
+            self.bullets.empty()  # Supprime toutes les balles
+            self._create_fleet()  # Crée une nouvelle flotte d'aliens
+            self.settings.increase_speed()  # Augmente la vitesse du jeu
 
     def _update_aliens(self):
         """Met à jour la position des aliens"""
