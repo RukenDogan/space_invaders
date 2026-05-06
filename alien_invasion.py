@@ -182,6 +182,7 @@ class AlienInvasion:
             self._create_fleet() # crée une nouvelle flotte d'aliens
             self.ship.center_ship() # centre le vaisseau
             self.game_active = True  # Démarre le jeu
+            self.settings.initialize_dynamic_settings() # Réinitialise les paramètres dynamiques du jeu
             pygame.mouse.set_visible(False)  # Cache le curseur de la souris pendant le jeu
 
     def _check_keydown_events(self, event):
