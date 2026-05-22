@@ -8,7 +8,7 @@ class Settings:
         # Paramètres de l'écran
         self.screen_width = 900 # Largeur de l'écran 900 pour 16:9
         self.screen_height = 600 # Hauteur de l'écran 600 pour 16:9
-        # self.bg_color = (230, 230, 230)
+        self.bg_color = (230, 230, 230)
 
         # taille de l'alien
         self.alien_width = 60
@@ -35,6 +35,7 @@ class Settings:
         self.bullets_allowed = 10 # Nombre maximum de tirs autorisés à l'écran
 
         self.speedup_scale = 1.1 # Facteur d'accélération pour augmenter la vitesse du jeu
+
 
     def initialize_dynamic_settings(self):
         """Initialiser les paramètres qui changent au cours du jeu"""

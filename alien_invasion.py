@@ -16,6 +16,7 @@ from time import sleep
 # Importe la classe GameStats depuis le fichier game_stats.py
 from game_stats import GameStats
 from button import Button  # Importe la classe Button depuis le fichier button.py
+from scoreboard import Scoreboard  # Importe la classe Scoreboard depuis le fichier scoreboard.py
 
 
 class AlienInvasion:
@@ -47,6 +48,8 @@ class AlienInvasion:
 
         # Crée une instance de la classe GameStats pour gérer les statistiques du jeu
         self.stats = GameStats(self)
+        # Crée une instance de la classe Scoreboard pour gérer l'affichage du score
+        self.sb = Scoreboard(self)
         # Crée une instance de la classe Ship pour gérer le vaisseau spatial
         self.ship = Ship(self)
         # Crée un groupe de sprites pour gérer les balles tirées par le vaisseau
@@ -276,6 +279,8 @@ class AlienInvasion:
         self.ship.blitme()  # Dessine le vaisseau
         # Dessine les aliens à leur position actuelle
         self.aliens.draw(self.screen)
+
+        self.sb.show_score()  # Affiche le score à l'écran
 
         # Si le jeu n'est pas actif (écran d'accueil ou écran de contrôle)
         if not self.game_active:
