@@ -46,6 +46,8 @@ class Settings:
         # fleet_direction de 1 représente la droite ; -1 représente la gauche.
         self.fleet_direction = 1
 
+        self.alien_points = 50 # Points attribués pour chaque alien touché
+
     def increase_speed(self):
         """Augmenter les paramètres de vitesse et de points"""
         self.ship_speed *= self.speedup_scale

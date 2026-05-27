@@ -237,6 +237,11 @@ class AlienInvasion:
         """Vérifie les collisions entre les balles et les aliens"""
         collisions = pygame.sprite.groupcollide( # Vérifie les collisions entre les balles et les aliens
             self.bullets, self.aliens, True, True) # Supprime la balle et l'alien lorsqu'une collision est détectée
+        
+        if collisions:  # Si des collisions ont été détectées
+            self.stats.score += self.settings.alien_points  # Augmente le score du joueur
+            self.sb.prep_score()  # Met à jour l'affichage du score
+        
         if not self.aliens:  # Si tous les aliens ont été détruits
             self.bullets.empty()  # Supprime toutes les balles
             self._create_fleet()  # Crée une nouvelle flotte d'aliens
