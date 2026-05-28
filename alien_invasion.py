@@ -181,6 +181,7 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)  # Vérifie si le bouton de démarrage a été cliqué
         if button_clicked and not self.game_active:  # Si le bouton de démarrage a été cliqué et que le jeu n'est pas actif
             self.stats.reset_stats() # Réinitialise les statistiques du jeu
+            self.sb.prep_score() # Réinitialise l'affichage du score
             self.bullets.empty()  # Supprime toutes les balles
             self._create_fleet() # crée une nouvelle flotte d'aliens
             self.ship.center_ship() # centre le vaisseau
