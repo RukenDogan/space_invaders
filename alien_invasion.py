@@ -240,7 +240,8 @@ class AlienInvasion:
             self.bullets, self.aliens, True, True) # Supprime la balle et l'alien lorsqu'une collision est détectée
         
         if collisions:  # Si des collisions ont été détectées
-            self.stats.score += self.settings.alien_points  # Augmente le score du joueur
+            for aliens in collisions.values():  # Parcourt les aliens touchés par les balles
+                self.stats.score += self.settings.alien_points * len(aliens) # Augmente le score du joueur
             self.sb.prep_score()  # Met à jour l'affichage du score
         
         if not self.aliens:  # Si tous les aliens ont été détruits
