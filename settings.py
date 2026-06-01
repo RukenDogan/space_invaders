@@ -36,6 +36,8 @@ class Settings:
 
         self.speedup_scale = 1.1 # Facteur d'accélération pour augmenter la vitesse du jeu
 
+        self.score_scale = 1.5 # Facteur d'augmentation des points attribués pour chaque alien touché
+
 
     def initialize_dynamic_settings(self):
         """Initialiser les paramètres qui changent au cours du jeu"""
@@ -53,3 +55,6 @@ class Settings:
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
+        print(self.alien_points)
