@@ -3,6 +3,8 @@ class GameStats:
         """ Initialise les stats de la partie """
         self.settings = ai_game.settings # Récupère les paramètres du jeu
         self.reset_stats() # Initialise les statistiques qui peuvent changer durant la partie
+
+        self.high_score = 0 # le score ne devrait jamais être réinitialisé, même si le joueur perd une partie
     
     def reset_stats(self):
         """ Initialise les stats qui peuvent changer durant la partie """
